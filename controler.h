@@ -6,7 +6,6 @@
 #include "window.h"
 
 class Controler : public QThread
-//! [1] //! [2]
 {
 private:
     Window &window;
@@ -22,7 +21,6 @@ public:
         {
             window.animation();
             msleep(50);
-            //msleep(200);
         }
     }
 };

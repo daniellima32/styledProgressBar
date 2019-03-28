@@ -99,11 +99,8 @@ int Window::getDecimalPartOfPercentage(double entry, int integerPart)
         if (abs(10.0 - differenceCeil) < delta) return 0;
         else return differenceCeil;
     }
-    //else if (abs(difference - 10.0) < delta) return 0;
-    //if (abs(differenceCeil - difference) < delta) return 0;
     else
     {
-        //Não deve retornar 1
         return difference;
     }
 }
@@ -164,30 +161,15 @@ void Window::paintEvent(QPaintEvent * /* event */)
     painter.setFont(font);
 
     QRect rectPerc {(int)diffX+250-110,(int)diffY+250+5, 250, 250};
-    //painter.drawText(rectPerc, QString::number(percentagem));
-    //painter.drawText(rectPerc, QString::number((int)percentagem));
-    //painter.drawText(rectPerc, QString::number(ceil(percentagem)));
-    //painter.drawText(rectPerc, QString::number(floor(percentagem)));
     int porcentageAsInteger = getPorcentageAsInteger(percentagem);
     painter.drawText(rectPerc, QString::number(porcentageAsInteger));
 
     font.setPointSize(40);
     painter.setFont(font);
     rectPerc =  {(int)diffX+250+100,(int)diffY+250, 250, 250};
-    //painter.drawText(rectPerc, QString::number(percentagem - (int)percentagem)); //old
 
-    //old way
-    /*subtr = percentagem - floor(percentagem);
-    int res = subtr * 10;
-    expression = subtr <= 0.9 && subtr >= 0.1;
-    painter.drawText(rectPerc, QString("0.")+QString::number(res));*/
-
-    //new way
     int temp = getDecimalPartOfPercentage(percentagem, porcentageAsInteger);
     painter.drawText(rectPerc, QString("0.")+QString::number(temp));
-
-
-    //painter.drawText(rectPerc, QString::number(1.0 - (ceil(percentagem) - percentagem))); //old
 
     rectPerc =  {(int)diffX+250,(int)diffY+220, 250, 250};
     painter.drawText(rectPerc, QString("%"));

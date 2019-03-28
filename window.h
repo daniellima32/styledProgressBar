@@ -61,7 +61,6 @@ class QSpinBox;
 QT_END_NAMESPACE
 class RenderArea;
 
-//! [0]
 class Window : public QWidget
 {
     Q_OBJECT
