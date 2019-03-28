@@ -3,7 +3,8 @@ QT += widgets
 HEADERS       = \
                 window.h \
     styledprogressbar.h \
-    userclass.h
+    userclass.h \
+    spbstate.h
 SOURCES       = main.cpp \
                 window.cpp \
     styledprogressbar.cpp \

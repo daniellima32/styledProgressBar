@@ -13,24 +13,52 @@ StyledProgressBar::StyledProgressBar(QString title)
     setWindowTitle(title);
 
     //Inserir dois botões na interface
-    QPushButton *pauseButton = new QPushButton(this);
+    pauseButton = new QPushButton(this);
     pauseButton->setText(tr("Pausar"));
     pauseButton->setGeometry(200,610,90,25);
 
-    QPushButton *cancelButton = new QPushButton(this);
+    cancelButton = new QPushButton(this);
     cancelButton->setText(tr("Cancelar"));
     cancelButton->setGeometry(310,610,90,25);
+
+    QObject::connect(pauseButton, &QPushButton::clicked, [this]()
+    {
+        if (state == SPBState::Executing) state = SPBState::Paused;
+        else if (state == SPBState::Paused) state = SPBState::Executing;
+    });
+
+    QObject::connect(cancelButton, &QPushButton::clicked, [this]()
+    {
+        this->pauseButton->setEnabled(false);
+        this->cancelButton->setEnabled(false);
+
+        this->state = SPBState::Canceled;
+    });
 }
 
 void StyledProgressBar::changeProgress(double percentage)
 {
+    if (state != SPBState::Executing) return;
+
     if (percentage < 0.0) percentage = 0.0;
-    else if (percentage > 100.0) percentage = 100.0;
+    else if (percentage > 100.0)
+    {
+        percentage = 100.0;
+        reachedTheEnd();
+    }
     else
         this->percentage = percentage;
 
     //Triggers the redraw
     this->update();
+}
+
+void StyledProgressBar::reachedTheEnd()
+{
+    pauseButton->setEnabled(false);
+    cancelButton->setEnabled(false);
+
+    state = SPBState::Finished;
 }
 
 void StyledProgressBar::paintEvent(QPaintEvent *)
@@ -103,6 +131,11 @@ void StyledProgressBar::paintEvent(QPaintEvent *)
 
     rectPerc =  {(int)diffX+250,(int)diffY+220, 250, 250};
     painter.drawText(rectPerc, QString("%"));
+}
+
+SPBState StyledProgressBar::getState()
+{
+    return state;
 }
 
 int StyledProgressBar::getAngleInDegreeBasedInPercentage(double percentage)

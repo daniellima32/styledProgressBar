@@ -19,9 +19,13 @@ UserClass::~UserClass()
 
 void UserClass::run()
 {
-    for(double exampleProgress = 0; exampleProgress <=100.0;exampleProgress += 0.1)
+    for(double exampleProgress = 0; exampleProgress <=100.0;)
     {
-        styledProgressBar->changeProgress(exampleProgress);
+        if (styledProgressBar->getState() == SPBState::Executing)
+        {
+            styledProgressBar->changeProgress(exampleProgress);
+            exampleProgress += 0.1;
+        }
         msleep(50);
     }
 }

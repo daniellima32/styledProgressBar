@@ -4,6 +4,10 @@
 #include <QWidget>
 #include <QString>
 
+#include "spbstate.h"
+
+class QPushButton;
+
 class StyledProgressBar : public QWidget
 {
     Q_OBJECT
@@ -15,6 +19,8 @@ public:
 
     void paintEvent(QPaintEvent * /* event */);
 
+    SPBState getState();
+
 private:
     int getPorcentageAsInteger(double entry);
     int getDecimalPartOfPercentage(double entry, int integerPart);
@@ -24,6 +30,12 @@ private:
     const double delta = 0.000005;
 
     double percentage; //The percentage informed by the user
+
+    SPBState state = SPBState::Executing;
+
+    QPushButton *pauseButton = nullptr;
+    QPushButton *cancelButton = nullptr;
+    void reachedTheEnd();
 };
 
 #endif // STYLEDPROGRESSBAR_H
