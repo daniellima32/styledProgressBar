@@ -23,8 +23,16 @@ StyledProgressBar::StyledProgressBar(QString title)
 
     QObject::connect(pauseButton, &QPushButton::clicked, [this]()
     {
-        if (state == SPBState::Executing) state = SPBState::Paused;
-        else if (state == SPBState::Paused) state = SPBState::Executing;
+        if (state == SPBState::Executing)
+        {
+            state = SPBState::Paused;
+            this->pauseButton->setText(tr("Continuar"));
+        }
+        else if (state == SPBState::Paused)
+        {
+            state = SPBState::Executing;
+            this->pauseButton->setText(tr("Pausar"));
+        }
     });
 
     QObject::connect(cancelButton, &QPushButton::clicked, [this]()
