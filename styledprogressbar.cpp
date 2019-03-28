@@ -4,6 +4,9 @@
 #include <QPainter>
 #include <QPushButton>
 #include <cmath>
+#include <QGraphicsScene>
+
+#include <QLabel>
 
 StyledProgressBar::StyledProgressBar(QString title)
 {
@@ -16,10 +19,28 @@ StyledProgressBar::StyledProgressBar(QString title)
     pauseButton = new QPushButton(this);
     pauseButton->setText(tr("Pausar"));
     pauseButton->setGeometry(200,610,90,25);
+    pauseButton->setFlat(true);
+    pauseButton->setAttribute(Qt::WA_TranslucentBackground);
+    pauseButton->setStyleSheet(
+        "background-color: white;"
+        "border: 1px solid black;"
+        "border-radius: 15px;"
+        //"font-size: 25px;"
+        );
+    QGraphicsScene scene;
+    QGraphicsProxyWidget *pButtonProxyWidget = scene.addWidget(pauseButton);
 
     cancelButton = new QPushButton(this);
     cancelButton->setText(tr("Cancelar"));
     cancelButton->setGeometry(310,610,90,25);
+    cancelButton->setFlat(true);
+    cancelButton->setAttribute(Qt::WA_TranslucentBackground);
+    cancelButton->setStyleSheet(
+        "background-color: white;"
+        "border: 1px solid black;"
+        "border-radius: 15px;"
+        //"font-size: 25px;"
+        );
 
     QObject::connect(pauseButton, &QPushButton::clicked, [this]()
     {
@@ -42,6 +63,24 @@ StyledProgressBar::StyledProgressBar(QString title)
 
         this->state = SPBState::Canceled;
     });
+
+    QLabel *label = new QLabel(this);
+    label->setText("Executando");
+    //label->setAttribute(Qt::WA_TranslucentBackground);
+    /*label->setStyleSheet(
+        "background-color: blue;"
+        "border: 1px solid black;"
+        "border-radius: 15px;"
+        //"font-size: 25px;"
+        );*/
+    label->setGeometry(520,10,70,25);
+    label->setStyleSheet(
+            "background-color: #7FFFD4;"
+            "border: 1px solid black;"
+            "border-radius: 15px;"
+            //"font-size: 25px;"
+            );
+    label->setAlignment(Qt::AlignCenter);
 }
 
 void StyledProgressBar::changeProgress(double percentage)
