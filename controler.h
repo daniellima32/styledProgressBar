@@ -21,9 +21,8 @@ public:
         for(double counter = 0; counter <=100.0;counter += 0.1)
         {
             window.animation();
-            //wait(1000);
-            msleep(200);
-            //msleep(1000);
+            msleep(50);
+            //msleep(200);
         }
     }
 };

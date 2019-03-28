@@ -79,7 +79,10 @@ public:
     void paintEvent(QPaintEvent * /* event */);
 
     void animation();
+    int getPorcentageAsInteger(double entry);
+    int getDecimalPartOfPercentage(double entry, int integerPart);
 private:
+    double delta = 0.000005;
 
     void changeProgress(double percent);
 };
