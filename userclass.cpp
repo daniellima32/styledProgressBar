@@ -26,6 +26,7 @@ void UserClass::run()
             styledProgressBar->changeProgress(exampleProgress);
             exampleProgress += 0.1;
         }
-        msleep(50);
+        //msleep(50);
+        msleep(10);
     }
 }

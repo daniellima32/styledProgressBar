@@ -7,6 +7,7 @@
 #include "spbstate.h"
 
 class QPushButton;
+class QLabel;
 
 class StyledProgressBar : public QWidget
 {
@@ -35,6 +36,7 @@ private:
 
     QPushButton *pauseButton = nullptr;
     QPushButton *cancelButton = nullptr;
+    QLabel *label = nullptr;
     void reachedTheEnd();
 };
 

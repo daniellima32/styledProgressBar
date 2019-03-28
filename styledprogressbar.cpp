@@ -48,11 +48,13 @@ StyledProgressBar::StyledProgressBar(QString title)
         {
             state = SPBState::Paused;
             this->pauseButton->setText(tr("Continuar"));
+            label->setText("Pausada");
         }
         else if (state == SPBState::Paused)
         {
             state = SPBState::Executing;
             this->pauseButton->setText(tr("Pausar"));
+            label->setText("Executando");
         }
     });
 
@@ -60,11 +62,12 @@ StyledProgressBar::StyledProgressBar(QString title)
     {
         this->pauseButton->setEnabled(false);
         this->cancelButton->setEnabled(false);
+        label->setText("Cancelada");
 
         this->state = SPBState::Canceled;
     });
 
-    QLabel *label = new QLabel(this);
+    label = new QLabel(this);
     label->setText("Executando");
     //label->setAttribute(Qt::WA_TranslucentBackground);
     /*label->setStyleSheet(
@@ -96,6 +99,12 @@ void StyledProgressBar::changeProgress(double percentage)
     else
         this->percentage = percentage;
 
+    if (abs(this->percentage - 100.0) < delta)
+    {
+        //reachedTheEnd();
+        label->setText("Finalizada");
+    }
+
     //Triggers the redraw
     this->update();
 }
@@ -104,6 +113,7 @@ void StyledProgressBar::reachedTheEnd()
 {
     pauseButton->setEnabled(false);
     cancelButton->setEnabled(false);
+    label->setText("Finalizada");
 
     state = SPBState::Finished;
 }
