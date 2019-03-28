@@ -53,16 +53,19 @@
 #include <QApplication>
 #include "controler.h"
 
-void consumeTime();
+#include "userclass.h"
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    Window window;
+    /*Window window;
     window.show();
 
     Controler controler(window);
-    controler.start();
+    controler.start();*/
+
+    UserClass userClass;
+    userClass.start();
 
     return app.exec();
 }
