@@ -66,11 +66,3 @@ int main(int argc, char *argv[])
 
     return app.exec();
 }
-
-void consumeTime()
-{
-    for(int i=0;i<9999;++i)
-    {
-        for(int j=0;j<9999;++j) {}
-    }
-}
