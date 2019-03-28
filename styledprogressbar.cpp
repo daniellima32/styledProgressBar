@@ -2,13 +2,24 @@
 
 #include <QPen>
 #include <QPainter>
+#include <QPushButton>
 #include <cmath>
 
-StyledProgressBar::StyledProgressBar()
+StyledProgressBar::StyledProgressBar(QString title)
 {
-    resize(600,600);
+    //resize(600,600);
+    resize(600,700);
     setFixedSize(this->size());
-    setWindowTitle(tr("Basic Drawing"));
+    setWindowTitle(title);
+
+    //Inserir dois botões na interface
+    QPushButton *pauseButton = new QPushButton(this);
+    pauseButton->setText(tr("Pausar"));
+    pauseButton->setGeometry(200,610,90,25);
+
+    QPushButton *cancelButton = new QPushButton(this);
+    cancelButton->setText(tr("Cancelar"));
+    cancelButton->setGeometry(310,610,90,25);
 }
 
 void StyledProgressBar::changeProgress(double percentage)

@@ -2,7 +2,6 @@ QT += widgets
 
 HEADERS       = \
                 window.h \
-    controler.h \
     styledprogressbar.h \
     userclass.h
 SOURCES       = main.cpp \

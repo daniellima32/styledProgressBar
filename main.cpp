@@ -51,8 +51,6 @@
 #include "window.h"
 
 #include <QApplication>
-#include "controler.h"
-
 #include "userclass.h"
 
 int main(int argc, char *argv[])

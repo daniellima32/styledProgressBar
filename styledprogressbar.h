@@ -2,13 +2,14 @@
 #define STYLEDPROGRESSBAR_H
 
 #include <QWidget>
+#include <QString>
 
 class StyledProgressBar : public QWidget
 {
     Q_OBJECT
 
 public:
-    StyledProgressBar();
+    StyledProgressBar(QString title = "Progress Bar");
 
     void changeProgress(double percentage);
 
