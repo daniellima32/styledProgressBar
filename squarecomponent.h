@@ -8,6 +8,13 @@
 #include <QRect>
 #include <cmath>
 
+
+
+//remover
+#include <iostream>
+using std::cout;
+using std::endl;
+
 class SquareComponent: public QWidget
 {
 public:
@@ -100,11 +107,14 @@ public:
         /* Escrever textos que indicam percentual feito */
         pen.setColor(Qt::white);
         QFont font;
-        font.setPointSize(77);
+        //font.setPointSize(width() > 100?77:40);
+        //font.setPointSize(width() > 100?20:14);
+        font.setPointSize(9);
         painter.setPen(pen);
         painter.setFont(font);
 
-        QRect rectPerc {(int)(0.30*width()),(double)(0.50*height()), 250, 250};
+        //QRect rectPerc {(int)(0.30*width()),(double)(0.50*height()), 250, 250};
+        QRect rectPerc {(int)(0.30*width()),(double)(0.50*height()), 5, 5};
         int porcentageAsInteger = getPorcentageAsInteger(percentage);
         painter.drawText(rectPerc, QString::number(porcentageAsInteger));
 
@@ -117,6 +127,11 @@ public:
 
         rectPerc =  {width()/2, (int) (0.37*height()), 250, 250};
         painter.drawText(rectPerc, QString("%"));
+
+        //cout << "Width: " << QString::number(width()) << endl;
+        /*int varWidth = width();
+        cout << "Width: " << varWidth << endl;
+        cout.flush();*/
     }
 
     int getAngleInDegreeBasedInPercentage(double percentage)
