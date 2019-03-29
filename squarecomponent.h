@@ -35,7 +35,7 @@ public:
         return h;
     }*/
 
-    double percentage = 0.25;
+    double percentage = 50;
     double diffX = 20;
     double diffY = 20;
 
