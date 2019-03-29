@@ -31,4 +31,5 @@ void UserClass::run()
         //msleep(50);
         msleep(10);
     }
+    while(1) {sleep(10);}
 }
