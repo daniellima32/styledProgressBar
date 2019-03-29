@@ -86,9 +86,9 @@ public:
         painter.drawArc(rect, startAngle, arcLength);
 
         /* Desenhar um círculo interno na cor cinza escuro */
-        /*pen.setColor(Qt::lightGray);
+        pen.setColor(Qt::lightGray);
         painter.setPen(pen);
-        painter.drawEllipse(QPoint{(int)diffX+250, (int)diffY+250},210,210);*/
+        painter.drawEllipse(QPoint{width()/2, height()/2},width()/2-3*diffX,height()/2-3*diffY);
 
         /* Escrever textos que indicam percentual feito */
         /*pen.setColor(Qt::white);
