@@ -46,8 +46,6 @@ public:
         painter.setPen(pen);
         painter.setBrush(brush);
 
-        //double diffX = 50, diffY = 50;
-        //QRect rect(0, 0, width(), height());
         QRect rect(diffX, diffY, width()-2*diffX, height()-2*diffY);
 
         /* Desenhar o fundo cinza em círculo */
@@ -90,13 +88,10 @@ public:
         /* Escrever textos que indicam percentual feito */
         pen.setColor(Qt::white);
         QFont font;
-        //font.setPointSize(width() > 40?77:40);
         font.setPointSize(width() > 100?40:20);
-        //font.setPointSize(9);
         painter.setPen(pen);
         painter.setFont(font);
 
-        //QRect rectPerc {(int)(0.30*width()),(double)(0.50*height()), 250, 250};
         QRect rectPerc {(int)(0.30*width()),(double)(0.50*height()), 100, 100};
         int porcentageAsInteger = getPorcentageAsInteger(percentage);
         painter.drawText(rectPerc, QString::number(porcentageAsInteger));
