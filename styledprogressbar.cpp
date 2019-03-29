@@ -215,7 +215,14 @@ void StyledProgressBar::resizeEvent(QResizeEvent * event)
         int side = qMin(width(), height());
         QRegion maskedRegion(width() / 2 - side / 2, height() / 2 - side / 2, side,
                              side, QRegion::Ellipse);
-        setMask(maskedRegion);
+        QPoint pos1 = pauseButton->pos();
+        QPoint pos2 = cancelButton->pos();
+        int dx=5, dy=5;
+        //QRegion regB1 (pos.rx(), pos.ry(), pauseButton->width(), pauseButton->height());
+        QRegion regB1 (pos1.rx()-dx, pos1.ry()-dy, pauseButton->width()+2*dx, pauseButton->height()+2*dy);
+        QRegion regB2 (pos2.rx()-dx, pos2.ry()-dy, cancelButton->width()+2*dx, cancelButton->height()+2*dy);
+        //setMask(maskedRegion.united(regB1));
+        setMask(maskedRegion.united(regB1.united(regB2)));
     }
     else
         QWidget::resizeEvent(event);
