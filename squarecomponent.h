@@ -64,7 +64,7 @@ public:
 
         /* Desenhar a parte indicadora do processamento */
         if (angle < 90)
-            pen.setColor(Qt::darkGray);
+            pen.setColor(Qt::darkYellow);
         else if (angle < 180)
             pen.setColor(Qt::darkBlue);
         else if (angle < 270)
