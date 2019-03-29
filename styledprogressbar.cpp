@@ -12,6 +12,8 @@
 
 #include "squarecomponent.h"
 
+#include "endanimation.h"
+
 StyledProgressBar::StyledProgressBar(QString title, StyledProgressBarType type):
     type (type)
 {
@@ -143,9 +145,14 @@ void StyledProgressBar::changeProgress(double percentage)
     else
         changePercentageValue(percentage);
 
-    if (abs(this->percentage - 100.0) < delta)
+    //if (abs(this->percentage - 100.0) < delta)
+    if (abs(percentage - 100.0) < delta)
     {
-        label->setText("Finalizada");
+        //label->setText("Finalizada");
+        //reachedTheEnd();
+
+        EndAnimation* anim = new EndAnimation(square);
+        anim->start();
     }
 
     //Triggers the redraw
@@ -159,6 +166,10 @@ void StyledProgressBar::reachedTheEnd()
     label->setText("Finalizada");
 
     state = SPBState::Finished;
+
+    //Animation
+    EndAnimation endAnimation(square);
+    endAnimation.start();
 }
 
 SPBState StyledProgressBar::getState()

@@ -16,6 +16,8 @@ public:
         setMinimumSize(300,300);
     }
 
+    ~SquareComponent(){}
+
     bool hasHeightForWidth() const override
     {
         return true;
