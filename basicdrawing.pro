@@ -4,7 +4,8 @@ HEADERS       = \
                 window.h \
     styledprogressbar.h \
     userclass.h \
-    spbstate.h
+    spbstate.h \
+    squarecomponent.h
 SOURCES       = main.cpp \
                 window.cpp \
     styledprogressbar.cpp \

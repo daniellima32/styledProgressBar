@@ -57,6 +57,8 @@
 #include <QLabel>
 #include <QPushButton>
 
+#include <squarecomponent.h>
+
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
@@ -99,6 +101,9 @@ int main(int argc, char *argv[])
     topLayout->addWidget(label);
 
     //Inserir em midleLayout
+    SquareComponent* square = new SquareComponent(&widget);
+    square->setStyleSheet("background-color:black;");
+    midleLayout->addWidget(square);
 
 
     //Inserir em downlayout
