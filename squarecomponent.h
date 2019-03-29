@@ -10,7 +10,11 @@
 
 class SquareComponent: public QWidget
 {
+private:
+    bool inFinalAnimation=false;
 public:
+    setInFinalAnimation(){inFinalAnimation=true;}
+
     SquareComponent(QWidget* parent): QWidget(parent)
     {
         setMinimumSize(300,300);
@@ -65,14 +69,20 @@ public:
         }
 
         /* Desenhar a parte indicadora do processamento */
-        if (angle < 90)
-            pen.setColor(Qt::darkYellow);
-        else if (angle < 180)
-            pen.setColor(Qt::darkBlue);
-        else if (angle < 270)
-            pen.setColor(Qt::darkCyan);
-        else
+
+        if (inFinalAnimation)
             pen.setColor(Qt::darkGreen);
+        else
+        {
+            if (angle < 90)
+                pen.setColor(Qt::darkYellow);
+            else if (angle < 180)
+                pen.setColor(Qt::darkBlue);
+            else if (angle < 270)
+                pen.setColor(Qt::darkCyan);
+            else
+                pen.setColor(Qt::darkGreen);
+        }
 
         painter.setPen(pen);
 
@@ -96,14 +106,14 @@ public:
 
         QRect rectPerc {(int)(0.30*width()),(double)(0.50*height()), 100, 100};
         int porcentageAsInteger = getPorcentageAsInteger(percentage);
-        painter.drawText(rectPerc, QString::number(porcentageAsInteger));
+        painter.drawText(rectPerc, inFinalAnimation? "100": QString::number(porcentageAsInteger));
 
         font.setPointSize(width() > 100?30:15);
         painter.setFont(font);
         rectPerc =  {(int)(0.60*width()), height()/2, 250, 250};
 
         int temp = getDecimalPartOfPercentage(percentage, porcentageAsInteger);
-        painter.drawText(rectPerc, QString("0.")+QString::number(temp));
+        painter.drawText(rectPerc, QString("0.")+(inFinalAnimation? "0":QString::number(temp)));
 
         rectPerc =  {width()/2, (int) (0.37*height()), 250, 250};
         painter.drawText(rectPerc, QString("%"));

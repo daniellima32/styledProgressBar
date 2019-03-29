@@ -170,7 +170,7 @@ void StyledProgressBar::reachedTheEnd()
     cancelButton->setEnabled(false);
     label->setText("Finalizada");
 
-    state = SPBState::Finished;
+    state = SPBState::FinalAnimation;
 
     //Animation
     EndAnimation endAnimation(square);

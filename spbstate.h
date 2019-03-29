@@ -3,7 +3,7 @@
 
 enum class SPBState
 {
-    Executing, Paused, Canceled, Finished
+    Executing, Paused, Canceled, FinalAnimation
 };
 
 #endif // SPBSTATE_H
