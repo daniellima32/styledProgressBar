@@ -102,7 +102,7 @@ int main(int argc, char *argv[])
 
     //Inserir em midleLayout
     SquareComponent* square = new SquareComponent(&widget);
-    square->setStyleSheet("background-color:black;");
+    //square->setStyleSheet("background-color:black;");
     midleLayout->addWidget(square);
 
 
