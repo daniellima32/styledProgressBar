@@ -68,12 +68,11 @@ int main(int argc, char *argv[])
     Controler controler(window);
     controler.start();*/
 
-    //UserClass userClass;
-    //userClass.start();
+    UserClass userClass;
+    userClass.start();
 
     QWidget widget;
     widget.resize(500,500);
-    //widget.setVisible(true);
 
     QVBoxLayout *layout = new QVBoxLayout;
 

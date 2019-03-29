@@ -6,6 +6,7 @@
 #include <QBrush>
 #include <QPainter>
 #include <QRect>
+#include <cmath>
 
 class SquareComponent: public QWidget
 {
@@ -38,6 +39,7 @@ public:
     double percentage = 50;
     double diffX = 20;
     double diffY = 20;
+    const double delta = 0.000005;
 
     void paintEvent(QPaintEvent *) override
     {
@@ -88,28 +90,28 @@ public:
         /* Desenhar um círculo interno na cor cinza escuro */
         pen.setColor(Qt::lightGray);
         painter.setPen(pen);
-        painter.drawEllipse(QPoint{width()/2, height()/2},width()/2-3*diffX,height()/2-3*diffY);
+        painter.drawEllipse(QPoint{width()/2, height()/2},(width()/2)-3*diffX,(height()/2)-3*diffY);
 
         /* Escrever textos que indicam percentual feito */
-        /*pen.setColor(Qt::white);
+        pen.setColor(Qt::white);
         QFont font;
         font.setPointSize(77);
         painter.setPen(pen);
         painter.setFont(font);
 
-        QRect rectPerc {(int)diffX+250-110,(int)diffY+250+5, 250, 250};
+        QRect rectPerc {(int)(0.30*width()),(double)(0.50*height()), 250, 250};
         int porcentageAsInteger = getPorcentageAsInteger(percentage);
         painter.drawText(rectPerc, QString::number(porcentageAsInteger));
 
         font.setPointSize(40);
         painter.setFont(font);
-        rectPerc =  {(int)diffX+250+100,(int)diffY+250, 250, 250};
+        rectPerc =  {(int)(0.60*width()), height()/2, 250, 250};
 
         int temp = getDecimalPartOfPercentage(percentage, porcentageAsInteger);
         painter.drawText(rectPerc, QString("0.")+QString::number(temp));
 
-        rectPerc =  {(int)diffX+250,(int)diffY+220, 250, 250};
-        painter.drawText(rectPerc, QString("%"));*/
+        rectPerc =  {width()/2, (int) (0.37*height()), 250, 250};
+        painter.drawText(rectPerc, QString("%"));
     }
 
     int getAngleInDegreeBasedInPercentage(double percentage)
@@ -122,6 +124,33 @@ public:
         double valor = (percentage*360)/100;
         return valor;
     }
+
+    int getPorcentageAsInteger(double entry)
+    {
+        double varFloor = floor(entry);
+        double varCeil = ceil(entry); //Teto
+        if (abs(varCeil - entry) < delta) return varCeil;
+        else return varFloor;
+    }
+
+    int getDecimalPartOfPercentage(double entry, int integerPart)
+    {
+        double varFloor = floor(entry);
+        double difference = entry - varFloor;
+        difference *= 10;
+        double differenceCeil = ceil(difference);
+        double differenceFloor = floor(difference);
+        if (abs(differenceCeil - difference) < delta)
+        {
+            if (abs(10.0 - differenceCeil) < delta) return 0;
+            else return differenceCeil;
+        }
+        else
+        {
+            return difference;
+        }
+    }
+
 
 };
 
