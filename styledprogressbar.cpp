@@ -131,6 +131,11 @@ StyledProgressBar::StyledProgressBar(QString title, StyledProgressBarType type):
     //layout->setStyleSheet("background-color: transparent;");
 }
 
+StyledProgressBar::~StyledProgressBar()
+{
+    int a = 10;
+}
+
 void StyledProgressBar::changeProgress(double percentage)
 {
     if (state != SPBState::Executing) return;

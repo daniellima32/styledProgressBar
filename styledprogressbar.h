@@ -22,6 +22,8 @@ class StyledProgressBar : public QWidget
 public:
     StyledProgressBar(QString title = "Progress Bar", StyledProgressBarType type = StyledProgressBarType::GENERAL);
 
+    ~StyledProgressBar();
+
     void changeProgress(double percentage);
 
     //void paintEvent(QPaintEvent * /* event */);

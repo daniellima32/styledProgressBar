@@ -1,5 +1,7 @@
 QT += widgets
 
+CONFIG += c++11
+
 HEADERS       = \
     styledprogressbar.h \
     userclass.h \
