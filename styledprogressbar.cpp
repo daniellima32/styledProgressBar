@@ -10,7 +10,6 @@
 
 StyledProgressBar::StyledProgressBar(QString title)
 {
-    //resize(600,600);
     resize(600,700);
     setFixedSize(this->size());
     setWindowTitle(title);
@@ -69,13 +68,6 @@ StyledProgressBar::StyledProgressBar(QString title)
 
     label = new QLabel(this);
     label->setText("Executando");
-    //label->setAttribute(Qt::WA_TranslucentBackground);
-    /*label->setStyleSheet(
-        "background-color: blue;"
-        "border: 1px solid black;"
-        "border-radius: 15px;"
-        //"font-size: 25px;"
-        );*/
     label->setGeometry(520,10,70,25);
     label->setStyleSheet(
             "background-color: #7FFFD4;"
