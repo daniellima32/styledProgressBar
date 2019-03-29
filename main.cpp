@@ -48,8 +48,6 @@
 **
 ****************************************************************************/
 
-#include "window.h"
-
 #include <QApplication>
 #include "userclass.h"
 
