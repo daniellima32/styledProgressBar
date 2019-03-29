@@ -14,7 +14,7 @@
 
 StyledProgressBar::StyledProgressBar(QString title)
 {
-    resize(500,500);
+    resize(320,370);
     setWindowTitle(title);
 
     QVBoxLayout *layout = new QVBoxLayout;

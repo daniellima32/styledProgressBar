@@ -8,19 +8,12 @@
 #include <QRect>
 #include <cmath>
 
-
-
-//remover
-#include <iostream>
-using std::cout;
-using std::endl;
-
 class SquareComponent: public QWidget
 {
 public:
     SquareComponent(QWidget* parent): QWidget(parent)
     {
-        setMinimumSize(200,200);
+        setMinimumSize(300,300);
     }
 
     bool hasHeightForWidth() const override
@@ -32,16 +25,6 @@ public:
     {
         return w;
     }
-
-    /*bool hasWidthForHeight() const override
-    {
-        return true;
-    }
-
-    int widthForHeight(int h) const override
-    {
-        return h;
-    }*/
 
     double percentage = 0.0;
     double diffX = 20;
@@ -107,18 +90,18 @@ public:
         /* Escrever textos que indicam percentual feito */
         pen.setColor(Qt::white);
         QFont font;
-        //font.setPointSize(width() > 100?77:40);
-        //font.setPointSize(width() > 100?20:14);
-        font.setPointSize(9);
+        //font.setPointSize(width() > 40?77:40);
+        font.setPointSize(width() > 100?40:20);
+        //font.setPointSize(9);
         painter.setPen(pen);
         painter.setFont(font);
 
         //QRect rectPerc {(int)(0.30*width()),(double)(0.50*height()), 250, 250};
-        QRect rectPerc {(int)(0.30*width()),(double)(0.50*height()), 5, 5};
+        QRect rectPerc {(int)(0.30*width()),(double)(0.50*height()), 100, 100};
         int porcentageAsInteger = getPorcentageAsInteger(percentage);
         painter.drawText(rectPerc, QString::number(porcentageAsInteger));
 
-        font.setPointSize(40);
+        font.setPointSize(width() > 100?30:15);
         painter.setFont(font);
         rectPerc =  {(int)(0.60*width()), height()/2, 250, 250};
 
@@ -127,11 +110,6 @@ public:
 
         rectPerc =  {width()/2, (int) (0.37*height()), 250, 250};
         painter.drawText(rectPerc, QString("%"));
-
-        //cout << "Width: " << QString::number(width()) << endl;
-        /*int varWidth = width();
-        cout << "Width: " << varWidth << endl;
-        cout.flush();*/
     }
 
     int getAngleInDegreeBasedInPercentage(double percentage)
