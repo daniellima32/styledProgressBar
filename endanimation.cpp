@@ -16,20 +16,20 @@ EndAnimation::~EndAnimation()
 void EndAnimation::run()
 {
     squareComponent->setInFinalAnimation();
-    for(double exampleProgress = 100.0; exampleProgress >=0.0;exampleProgress -= 0.1)
+    for(double exampleProgress = 100.0; exampleProgress >=0.0;exampleProgress -= 5)
     {
         squareComponent->changePercentageValue(exampleProgress);
         squareComponent->update();
-        msleep(10);
+        msleep(77);
     }
     while(1)
     {
         squareComponent->changePercentageValue(100);
         squareComponent->update();
-        sleep(1);
+        msleep(500);
 
         squareComponent->changePercentageValue(0);
         squareComponent->update();
-        sleep(1);
+        msleep(500);
     }
 }
