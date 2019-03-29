@@ -8,6 +8,7 @@
 
 class QPushButton;
 class QLabel;
+class SquareComponent;
 
 class StyledProgressBar : public QWidget
 {
@@ -18,11 +19,12 @@ public:
 
     void changeProgress(double percentage);
 
-    void paintEvent(QPaintEvent * /* event */);
+    //void paintEvent(QPaintEvent * /* event */);
 
     SPBState getState();
 
 private:
+    void changePercentageValue(double value);
     int getPorcentageAsInteger(double entry);
     int getDecimalPartOfPercentage(double entry, int integerPart);
 
@@ -37,6 +39,7 @@ private:
     QPushButton *pauseButton = nullptr;
     QPushButton *cancelButton = nullptr;
     QLabel *label = nullptr;
+    SquareComponent* square = nullptr;
     void reachedTheEnd();
 };
 

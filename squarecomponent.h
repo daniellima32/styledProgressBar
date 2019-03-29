@@ -36,10 +36,15 @@ public:
         return h;
     }*/
 
-    double percentage = 50;
+    double percentage = 0.0;
     double diffX = 20;
     double diffY = 20;
     const double delta = 0.000005;
+
+    void changePercentageValue(double value)
+    {
+        this->percentage = value;
+    }
 
     void paintEvent(QPaintEvent *) override
     {

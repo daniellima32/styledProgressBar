@@ -71,7 +71,7 @@ int main(int argc, char *argv[])
     UserClass userClass;
     userClass.start();
 
-    QWidget widget;
+    /*QWidget widget;
     widget.resize(500,500);
 
     QVBoxLayout *layout = new QVBoxLayout;
@@ -140,7 +140,7 @@ int main(int argc, char *argv[])
 
     widget.setLayout(layout);
 
-    widget.setVisible(true);
+    widget.setVisible(true);*/
 
     return app.exec();
 }
