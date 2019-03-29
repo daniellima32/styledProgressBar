@@ -110,6 +110,22 @@ StyledProgressBar::StyledProgressBar(QString title)
     });
 
     setVisible(true);
+
+
+    //new
+    /*setWindowFlags(Qt::Widget | Qt::FramelessWindowHint);
+    setParent(0); // Create TopLevel-Widget
+    setAttribute(Qt::WA_NoSystemBackground, true);
+    setAttribute(Qt::WA_TranslucentBackground, true);
+    setAttribute(Qt::WA_PaintOnScreen); // not needed in Qt 5.2 and up*/
+
+    //setStyleSheet("QWidget { background: transparent; }"); //makes the header transparent
+    //setAttribute(Qt::WA_TranslucentBackground);
+
+    setWindowOpacity(0.9);
+
+
+    //layout->setStyleSheet("background-color: transparent;");
 }
 
 void StyledProgressBar::changeProgress(double percentage)
