@@ -4,7 +4,9 @@
 
 UserClass::UserClass()
 {
-    styledProgressBar = new StyledProgressBar(tr("Simulação do eixo norte"));
+    styledProgressBar = new StyledProgressBar(tr("Simulação do eixo norte"),
+                                              StyledProgressBarType::SPECIFIC);
+                                              //StyledProgressBarType::GENERAL);
     styledProgressBar->show();
 }
 

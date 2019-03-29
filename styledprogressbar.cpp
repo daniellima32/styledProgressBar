@@ -12,7 +12,8 @@
 
 #include "squarecomponent.h"
 
-StyledProgressBar::StyledProgressBar(QString title)
+StyledProgressBar::StyledProgressBar(QString title, StyledProgressBarType type):
+    type (type)
 {
     resize(320,370);
     setWindowTitle(title);
@@ -205,4 +206,17 @@ int StyledProgressBar::getDecimalPartOfPercentage(double entry, int integerPart)
     {
         return difference;
     }
+}
+
+void StyledProgressBar::resizeEvent(QResizeEvent * event)
+{
+    if (type==StyledProgressBarType::SPECIFIC)
+    {
+        int side = qMin(width(), height());
+        QRegion maskedRegion(width() / 2 - side / 2, height() / 2 - side / 2, side,
+                             side, QRegion::Ellipse);
+        setMask(maskedRegion);
+    }
+    else
+        QWidget::resizeEvent(event);
 }

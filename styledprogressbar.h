@@ -10,12 +10,17 @@ class QPushButton;
 class QLabel;
 class SquareComponent;
 
+enum class StyledProgressBarType
+{
+    GENERAL, SPECIFIC
+};
+
 class StyledProgressBar : public QWidget
 {
     Q_OBJECT
 
 public:
-    StyledProgressBar(QString title = "Progress Bar");
+    StyledProgressBar(QString title = "Progress Bar", StyledProgressBarType type = StyledProgressBarType::GENERAL);
 
     void changeProgress(double percentage);
 
@@ -23,6 +28,7 @@ public:
 
     SPBState getState();
 
+    void resizeEvent(QResizeEvent *);
 private:
     void changePercentageValue(double value);
     int getPorcentageAsInteger(double entry);
@@ -41,6 +47,8 @@ private:
     QLabel *label = nullptr;
     SquareComponent* square = nullptr;
     void reachedTheEnd();
+
+    StyledProgressBarType type;
 };
 
 #endif // STYLEDPROGRESSBAR_H
