@@ -156,8 +156,12 @@ void StyledProgressBar::changeProgress(double percentage)
         //label->setText("Finalizada");
         //reachedTheEnd();
 
-        EndAnimation* anim = new EndAnimation(square);
-        anim->start();
+        if (state != SPBState::FinalAnimation)
+        {
+            EndAnimation* anim = new EndAnimation(square);
+            anim->start();
+            state = SPBState::FinalAnimation;
+        }
     }
 
     //Triggers the redraw
