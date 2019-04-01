@@ -13,7 +13,7 @@ class SquareComponent: public QWidget
 private:
     bool inFinalAnimation=false;
 public:
-    setInFinalAnimation(){inFinalAnimation=true;}
+    void setInFinalAnimation(){inFinalAnimation=true;}
 
     SquareComponent(QWidget* parent): QWidget(parent)
     {

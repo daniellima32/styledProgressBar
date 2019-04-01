@@ -4,7 +4,6 @@
 #include <QThread>
 
 class SquareComponent;
-//#include "squarecomponent.h"
 
 class EndAnimation : public QThread
 {

@@ -14,8 +14,9 @@ UserClass::~UserClass()
 {
     if (styledProgressBar != nullptr)
     {
+        styledProgressBar->close();
         this->terminate();
-        delete styledProgressBar;
+        //delete styledProgressBar;
     }
 }
 
@@ -28,7 +29,7 @@ void UserClass::run()
             styledProgressBar->changeProgress(exampleProgress);
             exampleProgress += 0.1;
         }
-        //msleep(50);
+
         msleep(10);
     }
 }

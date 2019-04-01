@@ -49,7 +49,7 @@ private:
     QPushButton *cancelButton = nullptr;
     QLabel *label = nullptr;
     SquareComponent* square = nullptr;
-    void reachedTheEnd();
+    //void reachedTheEnd();
 
     StyledProgressBarType type;
 };

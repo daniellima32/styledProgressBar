@@ -47,7 +47,6 @@ StyledProgressBar::StyledProgressBar(QString title, StyledProgressBarType type):
 
     //Inserir em midleLayout
     square = new SquareComponent(this);
-    //square->setStyleSheet("background-color:black;");
     midleLayout->addWidget(square);
 
 
@@ -82,8 +81,6 @@ StyledProgressBar::StyledProgressBar(QString title, StyledProgressBarType type):
     downLayout->addStretch();
 
 
-    //fim de down
-
     setLayout(layout);
 
     //Conectando eventos
@@ -116,21 +113,7 @@ StyledProgressBar::StyledProgressBar(QString title, StyledProgressBarType type):
 
     setVisible(true);
 
-
-    //new
-    /*setWindowFlags(Qt::Widget | Qt::FramelessWindowHint);
-    setParent(0); // Create TopLevel-Widget
-    setAttribute(Qt::WA_NoSystemBackground, true);
-    setAttribute(Qt::WA_TranslucentBackground, true);
-    setAttribute(Qt::WA_PaintOnScreen); // not needed in Qt 5.2 and up*/
-
-    //setStyleSheet("QWidget { background: transparent; }"); //makes the header transparent
-    //setAttribute(Qt::WA_TranslucentBackground);
-
     setWindowOpacity(0.9);
-
-
-    //layout->setStyleSheet("background-color: transparent;");
 }
 
 StyledProgressBar::~StyledProgressBar()
@@ -143,23 +126,11 @@ void StyledProgressBar::changeProgress(double percentage)
     if (state != SPBState::Executing) return;
 
     if (percentage < 0.0) changePercentageValue(0.0);
-    /*else if (percentage > 100.0)
-    {
-        //percentage = 100.0;
-        changePercentageValue(100.0);
-        reachedTheEnd();
-    }*/
     else
         changePercentageValue(percentage);
 
-    //if (abs(this->percentage - 100.0) < delta)
-    //if (abs(percentage - 100.0) < delta) //working
     if (abs(percentage - 100.0) < delta || percentage > 100.0)
     {
-        /*pauseButton->setEnabled(false);
-        cancelButton->setEnabled(false);
-        label->setText("Finalizada");*/
-
         if (state != SPBState::FinalAnimation)
         {
             EndAnimation* anim = new EndAnimation(square);
@@ -170,21 +141,6 @@ void StyledProgressBar::changeProgress(double percentage)
 
     //Triggers the redraw
     this->update();
-}
-
-void StyledProgressBar::reachedTheEnd()
-{
-    /*pauseButton->setEnabled(false);
-    cancelButton->setEnabled(false);
-    label->setText("Finalizada");*/
-
-    if (state != SPBState::FinalAnimation)
-    {
-        //Animation
-        EndAnimation endAnimation(square);
-        endAnimation.start();
-        state = SPBState::FinalAnimation;
-    }
 }
 
 SPBState StyledProgressBar::getState()
@@ -237,8 +193,6 @@ int StyledProgressBar::getDecimalPartOfPercentage(double entry, int integerPart)
 
 void StyledProgressBar::paintEvent(QPaintEvent *)
 {
-    //QWidget::pai
-
     if (abs(percentage - 100.0) < delta)
     {
         pauseButton->setEnabled(false);
@@ -258,7 +212,6 @@ void StyledProgressBar::resizeEvent(QResizeEvent * event)
         QPoint pos1 = pauseButton->pos();
         QPoint pos2 = cancelButton->pos();
         int dx=5, dy=5;
-        //QRegion regB1 (pos.rx(), pos.ry(), pauseButton->width(), pauseButton->height());
         QRegion regB1 (pos1.rx()-dx, pos1.ry()-dy, pauseButton->width()+2*dx, pauseButton->height()+2*dy);
         QRegion regB2 (pos2.rx()-dx, pos2.ry()-dy, cancelButton->width()+2*dx, cancelButton->height()+2*dy);
         //setMask(maskedRegion.united(regB1));
