@@ -105,11 +105,13 @@ StyledProgressBar::StyledProgressBar(QString title, StyledProgressBarType type):
 
     QObject::connect(cancelButton, &QPushButton::clicked, [this]()
     {
-        this->pauseButton->setEnabled(false);
-        this->cancelButton->setEnabled(false);
-        this->label->setText("Cancelada");
+        if (this->state == SPBState::Executing || this->state ==SPBState::Paused)
+        {
+            this->state = SPBState::Canceled;
+        }
 
-        this->state = SPBState::Canceled;
+        //this->close();
+        this->setVisible(false);
     });
 
     setVisible(true);
@@ -141,20 +143,22 @@ void StyledProgressBar::changeProgress(double percentage)
     if (state != SPBState::Executing) return;
 
     if (percentage < 0.0) changePercentageValue(0.0);
-    else if (percentage > 100.0)
+    /*else if (percentage > 100.0)
     {
         //percentage = 100.0;
         changePercentageValue(100.0);
         reachedTheEnd();
-    }
+    }*/
     else
         changePercentageValue(percentage);
 
     //if (abs(this->percentage - 100.0) < delta)
-    if (abs(percentage - 100.0) < delta)
+    //if (abs(percentage - 100.0) < delta) //working
+    if (abs(percentage - 100.0) < delta || percentage > 100.0)
     {
-        //label->setText("Finalizada");
-        //reachedTheEnd();
+        /*pauseButton->setEnabled(false);
+        cancelButton->setEnabled(false);
+        label->setText("Finalizada");*/
 
         if (state != SPBState::FinalAnimation)
         {
@@ -170,15 +174,17 @@ void StyledProgressBar::changeProgress(double percentage)
 
 void StyledProgressBar::reachedTheEnd()
 {
-    pauseButton->setEnabled(false);
+    /*pauseButton->setEnabled(false);
     cancelButton->setEnabled(false);
-    label->setText("Finalizada");
+    label->setText("Finalizada");*/
 
-    state = SPBState::FinalAnimation;
-
-    //Animation
-    EndAnimation endAnimation(square);
-    endAnimation.start();
+    if (state != SPBState::FinalAnimation)
+    {
+        //Animation
+        EndAnimation endAnimation(square);
+        endAnimation.start();
+        state = SPBState::FinalAnimation;
+    }
 }
 
 SPBState StyledProgressBar::getState()
@@ -188,6 +194,7 @@ SPBState StyledProgressBar::getState()
 
 void StyledProgressBar::changePercentageValue(double value)
 {
+    percentage = value;
     square->changePercentageValue(value);
 }
 
@@ -225,6 +232,19 @@ int StyledProgressBar::getDecimalPartOfPercentage(double entry, int integerPart)
     else
     {
         return difference;
+    }
+}
+
+void StyledProgressBar::paintEvent(QPaintEvent *)
+{
+    //QWidget::pai
+
+    if (abs(percentage - 100.0) < delta)
+    {
+        pauseButton->setEnabled(false);
+        //cancelButton->setEnabled(false);
+        cancelButton->setText("Finalizar");
+        label->setText("Finalizada");
     }
 }
 

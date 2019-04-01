@@ -31,6 +31,7 @@ public:
     SPBState getState();
 
     void resizeEvent(QResizeEvent *);
+    void paintEvent(QPaintEvent *);
 private:
     void changePercentageValue(double value);
     int getPorcentageAsInteger(double entry);
