@@ -12,7 +12,7 @@ class SquareComponent: public QWidget
 public:
     SquareComponent(QWidget* parent);
 
-    ~SquareComponent(){}
+    ~SquareComponent() override {}
 
     bool hasHeightForWidth() const override;
 

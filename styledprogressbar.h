@@ -25,7 +25,7 @@ public:
             QString title = "Progress Bar",
             StyledProgressBarType type = StyledProgressBarType::GENERAL,
             bool useOpacity = false,
-            double opacity = 0.9
+            double opacity = 1.0
     );
     ~StyledProgressBar();
 
