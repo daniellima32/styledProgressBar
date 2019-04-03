@@ -9,6 +9,7 @@
 class QPushButton;
 class QLabel;
 class SquareComponent;
+class EndAnimation;
 
 enum class StyledProgressBarType
 {
@@ -49,6 +50,7 @@ private:
     QPushButton *cancelButton = nullptr;
     QLabel *label = nullptr;
     SquareComponent* square = nullptr;
+    EndAnimation* anim = nullptr;
     //void reachedTheEnd();
 
     StyledProgressBarType type;

@@ -106,9 +106,13 @@ StyledProgressBar::StyledProgressBar(QString title, StyledProgressBarType type):
         {
             this->state = SPBState::Canceled;
         }
+        else if (this->state == SPBState::FinalAnimation)
+        {
+            this->state == SPBState::CloseWindow;
+        }
 
         //this->close();
-        this->setVisible(false);
+        //this->setVisible(false);
     });
 
     setVisible(true);
@@ -118,7 +122,10 @@ StyledProgressBar::StyledProgressBar(QString title, StyledProgressBarType type):
 
 StyledProgressBar::~StyledProgressBar()
 {
-    int a = 10;
+    /*if (anim != nullptr)
+    {
+        anim->exit(0);
+    }*/
 }
 
 void StyledProgressBar::changeProgress(double percentage)
@@ -133,7 +140,7 @@ void StyledProgressBar::changeProgress(double percentage)
     {
         if (state != SPBState::FinalAnimation)
         {
-            EndAnimation* anim = new EndAnimation(square);
+            anim = new EndAnimation(square);
             anim->start();
             state = SPBState::FinalAnimation;
         }

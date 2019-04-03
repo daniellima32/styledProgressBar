@@ -5,8 +5,8 @@
 UserClass::UserClass()
 {
     styledProgressBar = new StyledProgressBar(tr("Simulação do eixo norte"),
-                                              //StyledProgressBarType::SPECIFIC);
-                                              StyledProgressBarType::GENERAL);
+                                              StyledProgressBarType::SPECIFIC);
+                                              //StyledProgressBarType::GENERAL);
     styledProgressBar->show();
 }
 
@@ -20,6 +20,11 @@ UserClass::~UserClass()
     }
 }
 
+SPBState UserClass::getStateOfOwnedObject()
+{
+    return styledProgressBar->getState();
+}
+
 void UserClass::run()
 {
     for(double exampleProgress = 0; exampleProgress <=100.0;)
@@ -28,6 +33,13 @@ void UserClass::run()
         {
             styledProgressBar->changeProgress(exampleProgress);
             exampleProgress += 0.1;
+        }
+        else if (styledProgressBar->getState() == SPBState::Canceled ||
+                 styledProgressBar->getState() == SPBState::CloseWindow)
+        {
+            this->terminate();
+            styledProgressBar->close();
+            break;
         }
 
         msleep(10);

@@ -5,6 +5,8 @@
 
 class StyledProgressBar;
 
+#include "spbstate.h"
+
 class UserClass : public QThread
 {
 private:
@@ -15,6 +17,7 @@ public:
     ~UserClass();
 
     void run() override;
+    SPBState getStateOfOwnedObject();
 };
 
 #endif // USERCLASS_H
