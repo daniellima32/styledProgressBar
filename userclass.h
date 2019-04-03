@@ -11,7 +11,7 @@ private:
     StyledProgressBar* styledProgressBar = nullptr;
 
 public:
-    UserClass();
+    UserClass(StyledProgressBar * styledProgressBar);
     ~UserClass();
 
     void run() override;

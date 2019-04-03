@@ -2,21 +2,19 @@
 
 #include "styledprogressbar.h"
 
-UserClass::UserClass()
+UserClass::UserClass(StyledProgressBar * styledProgressBar): styledProgressBar(styledProgressBar)
 {
-    styledProgressBar = new StyledProgressBar(tr("Simulação do eixo norte"),
-                                              StyledProgressBarType::SPECIFIC);
-                                              //StyledProgressBarType::GENERAL);
-    styledProgressBar->show();
+
 }
 
 UserClass::~UserClass()
 {
-    if (styledProgressBar != nullptr)
+    /*if (styledProgressBar != nullptr)
     {
-        this->terminate();
+        styledProgressBar->setVisible(false);
+        styledProgressBar->close();
         delete styledProgressBar;
-    }
+    }*/
 }
 
 void UserClass::run()
@@ -28,8 +26,22 @@ void UserClass::run()
             styledProgressBar->changeProgress(exampleProgress);
             exampleProgress += 0.1;
         }
+        else if (styledProgressBar->getState() == SPBState::Canceled ||
+                 styledProgressBar->getState() == SPBState::End)
+        {
+            //styledProgressBar->close();
+            //break;
+        }
         //msleep(50);
         msleep(10);
     }
-    while(1) {sleep(10);}
+
+    /*if (styledProgressBar != nullptr)
+    {
+        styledProgressBar->setVisible(false);
+        styledProgressBar->close();
+        delete styledProgressBar;
+    }*/
+
+    //styledProgressBar->close();
 }

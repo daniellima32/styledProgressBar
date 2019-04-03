@@ -113,22 +113,7 @@ StyledProgressBar::StyledProgressBar(QString title, StyledProgressBarType type):
     });
 
     setVisible(true);
-
-
-    //new
-    /*setWindowFlags(Qt::Widget | Qt::FramelessWindowHint);
-    setParent(0); // Create TopLevel-Widget
-    setAttribute(Qt::WA_NoSystemBackground, true);
-    setAttribute(Qt::WA_TranslucentBackground, true);
-    setAttribute(Qt::WA_PaintOnScreen); // not needed in Qt 5.2 and up*/
-
-    //setStyleSheet("QWidget { background: transparent; }"); //makes the header transparent
-    //setAttribute(Qt::WA_TranslucentBackground);
-
     setWindowOpacity(0.9);
-
-
-    //layout->setStyleSheet("background-color: transparent;");
 }
 
 StyledProgressBar::~StyledProgressBar()
@@ -153,11 +138,7 @@ void StyledProgressBar::changeProgress(double percentage)
     //if (abs(this->percentage - 100.0) < delta)
     if (abs(percentage - 100.0) < delta)
     {
-        //label->setText("Finalizada");
-        //reachedTheEnd();
-
-        EndAnimation* anim = new EndAnimation(square);
-        anim->start();
+        reachedTheEnd();
     }
 
     //Triggers the redraw
@@ -166,15 +147,13 @@ void StyledProgressBar::changeProgress(double percentage)
 
 void StyledProgressBar::reachedTheEnd()
 {
-    pauseButton->setEnabled(false);
-    cancelButton->setEnabled(false);
+    //pauseButton->setEnabled(false);
+    //cancelButton->setEnabled(false);
     label->setText("Finalizada");
 
-    state = SPBState::FinalAnimation;
+    this->close();
 
-    //Animation
-    EndAnimation endAnimation(square);
-    endAnimation.start();
+    state = SPBState::End;
 }
 
 SPBState StyledProgressBar::getState()

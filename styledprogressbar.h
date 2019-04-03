@@ -26,8 +26,6 @@ public:
 
     void changeProgress(double percentage);
 
-    //void paintEvent(QPaintEvent * /* event */);
-
     SPBState getState();
 
     void resizeEvent(QResizeEvent *);

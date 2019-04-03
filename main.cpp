@@ -56,13 +56,59 @@
 #include <QPushButton>
 
 #include <squarecomponent.h>
+#include "styledprogressbar.h"
+
+#include <QMainWindow>
+
+void consumeTime()
+{
+    for(int i=0;i<10000;++i)
+    {
+        for(int j=0;j<1000;++j)
+        {}
+    }
+}
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    UserClass userClass;
-    userClass.start();
+    QWidget *window = new QWidget;
+    QPushButton *button1 = new QPushButton("One");
+
+    QVBoxLayout *layout = new QVBoxLayout;
+    layout->addWidget(button1);
+
+    window->setLayout(layout);
+    window->show();
+
+    QObject::connect(button1, &QPushButton::clicked, []()
+    {
+        StyledProgressBar styledProgressBar(QObject::tr("Simulação do eixo norte"),
+                                                      //StyledProgressBarType::SPECIFIC);
+                                                      StyledProgressBarType::GENERAL);
+
+        styledProgressBar.show();
+
+        QApplication::processEvents();
+
+        for(double exampleProgress = 0; exampleProgress <=100.0;)
+        {
+            if (styledProgressBar.getState() == SPBState::Executing)
+            {
+                styledProgressBar.changeProgress(exampleProgress);
+                exampleProgress += 0.1;
+            }
+            else if (styledProgressBar.getState() == SPBState::Canceled ||
+                     styledProgressBar.getState() == SPBState::End)
+            {
+                break;
+            }
+            styledProgressBar.update();
+            QApplication::processEvents();
+            consumeTime();
+        }
+    });
 
     return app.exec();
 }
