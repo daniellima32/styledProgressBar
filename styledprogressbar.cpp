@@ -112,18 +112,19 @@ StyledProgressBar::~StyledProgressBar()
 {
 }
 
+double getValueInRange(double percentage)
+{
+    if (percentage < 0.0) return 0.0;
+    else if (percentage > 100.0) return 100.0;
+    else return percentage;
+}
+
 void StyledProgressBar::changeProgress(double percentage)
 {
     if (state != SPBState::Executing) return;
 
-    if (percentage < 0.0) changePercentageValue(0.0);
-    else if (percentage > 100.0)
-    {
-        changePercentageValue(100.0);
-        reachedTheEnd();
-    }
-    else
-        changePercentageValue(percentage);
+    percentage = getValueInRange(percentage);
+    changePercentageValue(percentage);
 
     if (abs(percentage - 100.0) < delta)
     {
