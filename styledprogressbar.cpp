@@ -3,9 +3,6 @@
 #include <QPen>
 #include <QPainter>
 #include <QPushButton>
-#include <cmath>
-#include <QGraphicsScene>
-
 #include <QLabel>
 #include <QVBoxLayout>
 #include "squarecomponent.h"

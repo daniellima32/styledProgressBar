@@ -6,7 +6,6 @@
 #include <QBrush>
 #include <QPainter>
 #include <QRect>
-#include <cmath>
 
 class SquareComponent: public QWidget
 {
