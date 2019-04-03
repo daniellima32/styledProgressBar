@@ -7,7 +7,8 @@ HEADERS       = \
     spbstate.h \
     squarecomponent.h
 SOURCES       = main.cpp \
-    styledprogressbar.cpp
+    styledprogressbar.cpp \
+    squarecomponent.cpp
 RESOURCES     =
 
 # install
