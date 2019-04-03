@@ -156,43 +156,6 @@ void StyledProgressBar::changePercentageValue(double value)
     square->changePercentageValue(value);
 }
 
-int StyledProgressBar::getAngleInDegreeBasedInPercentage(double percentage)
-{
-    //Deve converter percent para um valor inteiro entre 0 e 360
-    //100   ----   360
-    //percent  ---- x
-    //x = (percent*360)/100
-
-    double valor = (percentage*360)/100;
-    return valor;
-}
-
-int StyledProgressBar::getPorcentageAsInteger(double entry)
-{
-    double varFloor = floor(entry);
-    double varCeil = ceil(entry); //Teto
-    if (abs(varCeil - entry) < delta) return varCeil;
-    else return varFloor;
-}
-
-int StyledProgressBar::getDecimalPartOfPercentage(double entry, int integerPart)
-{
-    double varFloor = floor(entry);
-    double difference = entry - varFloor;
-    difference *= 10;
-    double differenceCeil = ceil(difference);
-    double differenceFloor = floor(difference);
-    if (abs(differenceCeil - difference) < delta)
-    {
-        if (abs(10.0 - differenceCeil) < delta) return 0;
-        else return differenceCeil;
-    }
-    else
-    {
-        return difference;
-    }
-}
-
 void StyledProgressBar::resizeEvent(QResizeEvent * event)
 {
     if (type==StyledProgressBarType::SPECIFIC)

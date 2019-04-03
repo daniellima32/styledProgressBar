@@ -31,14 +31,8 @@ public:
     void resizeEvent(QResizeEvent *);
 private:
     void changePercentageValue(double value);
-    int getPorcentageAsInteger(double entry);
-    int getDecimalPartOfPercentage(double entry, int integerPart);
-
-    int getAngleInDegreeBasedInPercentage(double percentage);
 
     const double delta = 0.000005;
-
-    double percentage; //The percentage informed by the user
 
     SPBState state = SPBState::Executing;
 
