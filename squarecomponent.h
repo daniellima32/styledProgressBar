@@ -10,8 +10,6 @@
 
 class SquareComponent: public QWidget
 {
-private:
-    bool inFinalAnimation=false;
 public:
     SquareComponent(QWidget* parent): QWidget(parent)
     {
@@ -68,19 +66,14 @@ public:
 
         /* Desenhar a parte indicadora do processamento */
 
-        if (inFinalAnimation)
-            pen.setColor(Qt::darkGreen);
+        if (angle < 90)
+            pen.setColor(Qt::darkYellow);
+        else if (angle < 180)
+            pen.setColor(Qt::darkBlue);
+        else if (angle < 270)
+            pen.setColor(Qt::darkCyan);
         else
-        {
-            if (angle < 90)
-                pen.setColor(Qt::darkYellow);
-            else if (angle < 180)
-                pen.setColor(Qt::darkBlue);
-            else if (angle < 270)
-                pen.setColor(Qt::darkCyan);
-            else
-                pen.setColor(Qt::darkGreen);
-        }
+            pen.setColor(Qt::darkGreen);
 
         painter.setPen(pen);
 
@@ -103,15 +96,11 @@ public:
         painter.setFont(font);
 
         QRect rectPerc {(int)(0.30*width()),(double)(0.50*height()), 100, 100};
-        int porcentageAsInteger = getPorcentageAsInteger(percentage);
-        painter.drawText(rectPerc, inFinalAnimation? "100": QString::number(porcentageAsInteger));
+        painter.drawText(rectPerc, QString::number(percentage, 'f', 1));
 
         font.setPointSize(width() > 100?30:15);
         painter.setFont(font);
         rectPerc =  {(int)(0.60*width()), height()/2, 250, 250};
-
-        int temp = getDecimalPartOfPercentage(percentage, porcentageAsInteger);
-        painter.drawText(rectPerc, QString("0.")+(inFinalAnimation? "0":QString::number(temp)));
 
         rectPerc =  {width()/2, (int) (0.37*height()), 250, 250};
         painter.drawText(rectPerc, QString("%"));
@@ -127,34 +116,6 @@ public:
         double valor = (percentage*360)/100;
         return valor;
     }
-
-    int getPorcentageAsInteger(double entry)
-    {
-        double varFloor = floor(entry);
-        double varCeil = ceil(entry); //Teto
-        if (abs(varCeil - entry) < delta) return varCeil;
-        else return varFloor;
-    }
-
-    int getDecimalPartOfPercentage(double entry, int integerPart)
-    {
-        double varFloor = floor(entry);
-        double difference = entry - varFloor;
-        difference *= 10;
-        double differenceCeil = ceil(difference);
-        double differenceFloor = floor(difference);
-        if (abs(differenceCeil - difference) < delta)
-        {
-            if (abs(10.0 - differenceCeil) < delta) return 0;
-            else return differenceCeil;
-        }
-        else
-        {
-            return difference;
-        }
-    }
-
-
 };
 
 #endif // SQUARECOMPONENT_H
