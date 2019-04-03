@@ -7,12 +7,8 @@
 #include <QGraphicsScene>
 
 #include <QLabel>
-
 #include <QVBoxLayout>
-
 #include "squarecomponent.h"
-
-#include "endanimation.h"
 
 StyledProgressBar::StyledProgressBar(QString title, StyledProgressBarType type):
     type (type)
@@ -47,9 +43,7 @@ StyledProgressBar::StyledProgressBar(QString title, StyledProgressBarType type):
 
     //Inserir em midleLayout
     square = new SquareComponent(this);
-    //square->setStyleSheet("background-color:black;");
     midleLayout->addWidget(square);
-
 
     //Inserir em downlayout
     pauseButton = new QPushButton(this);
@@ -81,9 +75,7 @@ StyledProgressBar::StyledProgressBar(QString title, StyledProgressBarType type):
     downLayout->addWidget(cancelButton);
     downLayout->addStretch();
 
-
     //fim de down
-
     setLayout(layout);
 
     //Conectando eventos
@@ -118,7 +110,6 @@ StyledProgressBar::StyledProgressBar(QString title, StyledProgressBarType type):
 
 StyledProgressBar::~StyledProgressBar()
 {
-    int a = 10;
 }
 
 void StyledProgressBar::changeProgress(double percentage)
@@ -128,14 +119,12 @@ void StyledProgressBar::changeProgress(double percentage)
     if (percentage < 0.0) changePercentageValue(0.0);
     else if (percentage > 100.0)
     {
-        //percentage = 100.0;
         changePercentageValue(100.0);
         reachedTheEnd();
     }
     else
         changePercentageValue(percentage);
 
-    //if (abs(this->percentage - 100.0) < delta)
     if (abs(percentage - 100.0) < delta)
     {
         reachedTheEnd();
@@ -147,8 +136,8 @@ void StyledProgressBar::changeProgress(double percentage)
 
 void StyledProgressBar::reachedTheEnd()
 {
-    //pauseButton->setEnabled(false);
-    //cancelButton->setEnabled(false);
+    pauseButton->setEnabled(false);
+    cancelButton->setEnabled(false);
     label->setText("Finalizada");
 
     this->close();
@@ -213,10 +202,8 @@ void StyledProgressBar::resizeEvent(QResizeEvent * event)
         QPoint pos1 = pauseButton->pos();
         QPoint pos2 = cancelButton->pos();
         int dx=5, dy=5;
-        //QRegion regB1 (pos.rx(), pos.ry(), pauseButton->width(), pauseButton->height());
         QRegion regB1 (pos1.rx()-dx, pos1.ry()-dy, pauseButton->width()+2*dx, pauseButton->height()+2*dy);
         QRegion regB2 (pos2.rx()-dx, pos2.ry()-dy, cancelButton->width()+2*dx, cancelButton->height()+2*dy);
-        //setMask(maskedRegion.united(regB1));
         setMask(maskedRegion.united(regB1.united(regB2)));
     }
     else

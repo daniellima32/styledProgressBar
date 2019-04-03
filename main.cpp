@@ -49,7 +49,6 @@
 ****************************************************************************/
 
 #include <QApplication>
-#include "userclass.h"
 
 #include <QHBoxLayout>
 #include <QLabel>

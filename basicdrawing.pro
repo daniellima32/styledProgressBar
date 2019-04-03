@@ -4,14 +4,10 @@ CONFIG += c++11
 
 HEADERS       = \
     styledprogressbar.h \
-    userclass.h \
     spbstate.h \
-    squarecomponent.h \
-    endanimation.h
+    squarecomponent.h
 SOURCES       = main.cpp \
-    styledprogressbar.cpp \
-    userclass.cpp \
-    endanimation.cpp
+    styledprogressbar.cpp
 RESOURCES     =
 
 # install
