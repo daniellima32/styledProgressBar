@@ -13,8 +13,6 @@ class SquareComponent: public QWidget
 private:
     bool inFinalAnimation=false;
 public:
-    setInFinalAnimation(){inFinalAnimation=true;}
-
     SquareComponent(QWidget* parent): QWidget(parent)
     {
         setMinimumSize(300,300);
