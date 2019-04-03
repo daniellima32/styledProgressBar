@@ -127,6 +127,15 @@ double getValueInRange(double percentage)
     else return percentage;
 }
 
+void StyledProgressBar::changeProgress(double actual, double total)
+{
+    //total ----- 100
+    //actual ------ x
+    //x = (actual*100)/total
+
+    changeProgress((actual*100.)/total);
+}
+
 void StyledProgressBar::changeProgress(double percentage)
 {
     if (state != SPBState::Executing) return;

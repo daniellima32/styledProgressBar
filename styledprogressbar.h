@@ -29,11 +29,12 @@ public:
     );
     ~StyledProgressBar();
 
-    void changeProgress(double percentage);
-
     SPBState getState();
 
     void resizeEvent(QResizeEvent *);
+
+    void changeProgress(double percentage);
+    void changeProgress(double actual, double total);
 private:
     void changePercentageValue(double value);
     void reachedTheEnd();
