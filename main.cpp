@@ -84,8 +84,8 @@ int main(int argc, char *argv[])
     QObject::connect(button1, &QPushButton::clicked, []()
     {
         StyledProgressBar styledProgressBar(QObject::tr("Simulação do eixo norte"),
-                                                      //StyledProgressBarType::SPECIFIC);
-                                                      StyledProgressBarType::GENERAL);
+                                                      StyledProgressBarType::SPECIFIC);
+                                                      //StyledProgressBarType::GENERAL);
 
         styledProgressBar.show();
 

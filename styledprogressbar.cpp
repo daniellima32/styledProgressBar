@@ -10,7 +10,13 @@
 #include <QVBoxLayout>
 #include "squarecomponent.h"
 
-StyledProgressBar::StyledProgressBar(QString title, StyledProgressBarType type):
+StyledProgressBar::StyledProgressBar
+(
+        QString title,
+        StyledProgressBarType type,
+        bool useOpacity,
+        double opacity
+):
     type (type)
 {
     resize(320,370);
@@ -105,7 +111,8 @@ StyledProgressBar::StyledProgressBar(QString title, StyledProgressBarType type):
     });
 
     setVisible(true);
-    setWindowOpacity(0.9);
+
+    if (useOpacity) setWindowOpacity(opacity);
 }
 
 StyledProgressBar::~StyledProgressBar()

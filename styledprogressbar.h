@@ -20,7 +20,13 @@ class StyledProgressBar : public QWidget
     Q_OBJECT
 
 public:
-    StyledProgressBar(QString title = "Progress Bar", StyledProgressBarType type = StyledProgressBarType::GENERAL);
+    StyledProgressBar
+    (
+            QString title = "Progress Bar",
+            StyledProgressBarType type = StyledProgressBarType::GENERAL,
+            bool useOpacity = false,
+            double opacity = 0.9
+    );
     ~StyledProgressBar();
 
     void changeProgress(double percentage);
