@@ -21,7 +21,6 @@ class StyledProgressBar : public QWidget
 
 public:
     StyledProgressBar(QString title = "Progress Bar", StyledProgressBarType type = StyledProgressBarType::GENERAL);
-
     ~StyledProgressBar();
 
     void changeProgress(double percentage);
@@ -31,18 +30,15 @@ public:
     void resizeEvent(QResizeEvent *);
 private:
     void changePercentageValue(double value);
+    void reachedTheEnd();
 
     const double delta = 0.000005;
-
+    StyledProgressBarType type;
     SPBState state = SPBState::Executing;
-
     QPushButton *pauseButton = nullptr;
     QPushButton *cancelButton = nullptr;
     QLabel *label = nullptr;
     SquareComponent* square = nullptr;
-    void reachedTheEnd();
-
-    StyledProgressBarType type;
 };
 
 #endif // STYLEDPROGRESSBAR_H

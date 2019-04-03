@@ -110,6 +110,10 @@ StyledProgressBar::StyledProgressBar(QString title, StyledProgressBarType type):
 
 StyledProgressBar::~StyledProgressBar()
 {
+    if (pauseButton != nullptr) delete pauseButton;
+    if (cancelButton != nullptr) delete cancelButton;
+    if (label != nullptr) delete label;
+    if (square != nullptr) delete square;
 }
 
 double getValueInRange(double percentage)
